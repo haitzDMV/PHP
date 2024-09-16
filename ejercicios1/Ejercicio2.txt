@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<?php
+$rand1 = rand(1,10);
+$rand2 = rand(1,10);
+$rand3 = rand(1,10);
+echo "1 - $rand1 <br>";
+echo "2 - $rand2 <br>";
+echo "3 - $rand3 <br>";
+$res = max($rand1,$rand2,$rand3);
+echo "Mayor: $res";
+?>
+
+</body>
+</html>

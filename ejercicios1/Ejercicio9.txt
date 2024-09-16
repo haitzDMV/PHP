@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<?php
+$ventas = "41000";
+
+if ($ventas < 10000) {
+	echo "Tu comisión es: " . $ventas*0.05;
+} elseif ($ventas >= 10000 && $ventas < 20000) {
+	echo "Tu comisión es: " . $ventas*0.08;
+} elseif ($ventas >= 20000 && $ventas < 40000) {
+	echo "Tu comisión es: " . $ventas*0.1;
+} else {
+	echo "Tu comisión es: " . $ventas*0.13;
+}
+
+?>
+
+</body>
+</html>

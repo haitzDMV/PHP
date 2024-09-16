@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<?php
+$pal = "civic";
+
+if($pal == strrev($pal)) {
+    echo "Si";
+} else {
+    echo "No";
+}
+
+?>
+
+</body>
+</html>

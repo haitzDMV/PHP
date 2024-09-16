@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<?php
+$edad = 7;
+$alt = 110;
+$ac = false;
+
+if($edad > 10 || $alt > 120) {
+    echo "Si 1";
+} elseif ($ac == true && $edad > 6) {
+    echo "Si 2";
+}else {
+	echo "No";
+}
+
+?>
+
+</body>
+</html>

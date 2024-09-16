@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<?php
+$pot = 3;
+$cant = 100;
+
+for ($i = 1;$res < $cant;$i++) {
+    $res = pow($i,$pot);
+    if ($res < $cant) {
+    echo $i . "-" . $res . "<br>";
+    }
+}
+
+?>
+
+</body>
+</html>

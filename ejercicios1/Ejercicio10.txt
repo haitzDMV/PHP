@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<?php
+$compra1 = array(21,"mascotas");
+$pfin = $compra1[0];
+$bool = "true";
+
+if ($compra1[0] <= 19) {
+	if ($compra1[1] == "mascotas") {
+    	echo "No se puede enviar.<br>";
+        $bool = "false";
+    } else {
+    	echo "Los gastos de envío son 9€.<br>";
+        $pfin= $pfin + 9;
+    }
+} elseif ($compra1[0] > 19 && $compra1[0] <= 40) {
+	echo "Los gastos de envío son 9€.<br>";
+    $pfin= $pfin + 9;
+} elseif ($compra1[0] > 80) {
+	echo "Los gastos de envío son gratuitos.<br>";
+}
+
+if ($compra1[1] == "mascotas" && $bool == "true") {
+	$pfin = $pfin + ($pfin * 0.1);
+    echo "Precio final: " . $pfin . "€.";
+} elseif ($compra1[1] == "ropa" && $bool == "true") {
+	$pfin = $pfin + ($pfin * 0.21);
+    echo "Precio final: " . $pfin . "€.";
+}
+
+?>
+
+</body>
+</html>
