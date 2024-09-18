@@ -3,6 +3,15 @@
 <body>
 
 <?php
+
+function test_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+  }
+
+
 $usuErr = $correoErr = $contra1Err = $contra2Err = "";
 $usu = $correo = $contra1 = $contra2 = "";
 $patronNombre = "/^[a-zA-Z\s]+$/";
@@ -14,7 +23,7 @@ $contErrores = 0;
             $contErrores++;
         } else {
             if (preg_match($patronNombre,$_POST["usu"])) {
-                $nombre = $_POST["usu"];
+                $nombre = test_input($_POST["usu"]);
             } else {
                 $usuErr = "El nombre solo puede contener mayusculas, minusculas y espacios.";
                 $contErrores++;
@@ -25,7 +34,7 @@ $contErrores = 0;
             $contErrores++;
         } else {
             if (filter_var($_POST["correo"],FILTER_VALIDATE_EMAIL)) {
-                $correo = $_POST["correo"];
+                $correo = test_input($_POST["correo"]);
             } else {
                 $correoErr = "Formato de correo invalido";
                 $contErrores++;
@@ -37,9 +46,9 @@ $contErrores = 0;
             $contErrores++;
         } else {
             if (preg_match($patronContra,$_POST["contra1"])) {
-                $contra1 = $_POST["contra1"];
+                $contra1 = test_input($_POST["contra1"]);
                 if ($contra1 == $_POST["contra2"]) {
-                    $contra2 = $_POST["contra2"];
+                    $contra2 = test_input($_POST["contra2"]);
                 }
             } else {
                 $contra1Err = "La contraseña debe se al menos de 6 caracteres y contener al menos una letra minuscula, una letra mayuscula, un numero y un caracter especial";
@@ -53,9 +62,7 @@ $contErrores = 0;
         }
 
 
-        if ($contErrores == 0) {
-            print_r("TODO BIEN");
-        }
+       
         
     }    
 
@@ -71,6 +78,15 @@ Contraseña: <input type="password" name="contra1"><?php echo $contra1Err ?><br>
 Confirmar contraseña: <input type="password" name="contra2"><?php echo $contra2Err ?><br>
 <input type="submit">
 </form>
+
+
+<?php
+
+    if ($contErrores == 0) {
+        print_r("TODO BIEN");
+    }
+
+?>
 
 </body>
 </html>
