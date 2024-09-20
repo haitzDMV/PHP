@@ -13,7 +13,7 @@ function test_input($data) {
 
 
 $usuErr = $correoErr = $contra1Err = $contra2Err = "";
-$usu = $correo = $contra1 = $contra2 = "";
+$nombre = $correo = $contra1 = $contra2 = "";
 $patronNombre = "/^[a-zA-Z\s]+$/";
 $patronContra = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~`-])[A-Za-z\d!@#$%^&*()_+{}\[\]:;<>,.?~`-]{6,}$/";
 $contErrores = 10;
@@ -70,7 +70,7 @@ $contErrores = 10;
 ?>
 
 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST">
-Nombre usuario: <input type="text" name="usu" value="<?php echo $usu ?>"><?php echo $usuErr ?><br>
+Nombre usuario: <input type="text" name="usu" value="<?php echo $nombre ?>"><?php echo $usuErr ?><br>
 Correo electronico: <input type="text" name="correo" value="<?php echo $correo ?>"><?php echo $correoErr ?><br>
 Contraseña: <input type="password" name="contra1"><?php echo $contra1Err ?><br>
 Confirmar contraseña: <input type="password" name="contra2"><?php echo $contra2Err ?><br>
