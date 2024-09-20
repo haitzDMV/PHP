@@ -1,16 +1,46 @@
 <?php
-$usu = $_POST["usu"];
-$email = $_POST["email"];
-$passwd1 = $_POST["passwd1"];
-$passwd2 = $_POST["passwd2"];
 
-echo "Nombre de usuario: " . $usu . "<br>";
-echo "Email: " . $email . "<br>";
-if ($passwd1 == $passwd2) {
-    echo "Las contraseñas coinciden.<br>";
-} else {
-    echo "Las contraseñas no coinciden.<br>";
+$nom = $_POST["nombre"];
+$ape = $_POST["apellido"];
+$ema = $_POST["email"];
+$tel = $_POST["telefono"];
+
+class Usuario {
+    private $nombre;
+    private $apellido;
+    private $email;
+    private $telefono;
+    
+
+    function __construct($nombre,$apellido,$email,$telefono)
+    {
+        $this -> nombre = $nombre;
+        $this -> apellido = $apellido;
+        $this -> email = $email;
+        $this -> telefono = $telefono;
+    }
+
+    function getNombre() {
+        return $this->nombre;
+    }
+    function getApellido() {
+        return $this->apellido;
+    }
+    function getEmail() {
+        return $this->email;
+    }
+    function getTelefono() {
+        return $this->telefono;
+    }
+
 }
+
+$u1 = new Usuario($nom,$ape,$ema,$tel);
+
+echo "Nombre: " . $u1->getNombre() . "<br>";
+echo "Apellido: " . $u1->getApellido() . "<br>";
+echo "Email: " . $u1->getEmail() . "<br>";
+echo "Telefono: " . $u1->getTelefono() . "<br>";
 
 
 
