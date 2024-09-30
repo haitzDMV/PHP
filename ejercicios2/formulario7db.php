@@ -74,7 +74,38 @@
         </form>
       <?php 
         if($contadorError==3){
-          echo "<br>"."Formulario correctamente completado";
+            echo "<br>Formulario correctamente completado";
+            $servidor = "db";
+            $usuario = "root";
+            $contrasena = "root";
+            $db = "mydatabase";
+
+            $correo = $_POST["email"];
+            $nombre = $_POST["nombre"];
+            $contra = $_POST["contraseña"];
+
+            // Create connection
+            $conn = new mysqli($servidor, $usuario, $contrasena,$db);
+
+
+            // Check connection
+            if ($conn->connect_error) {
+                die("<br>Connection failed: " . $conn->connect_error);
+            } else {
+                echo "<br>Connected successfully";
+            }
+
+            $sql = "INSERT INTO formulario (usuario, email, contrasena)
+            VALUES ('$nombre', '$email', '$contra')";
+
+            if ($conn->query($sql) === TRUE) {
+                echo "<br>Insertado correctamente.";
+            } else {
+                echo "<br>Error: " . $sql . "<br>" . $conn->error;
+            }
+
+            $conn->close();
+
         }
       ?>
 </body>
