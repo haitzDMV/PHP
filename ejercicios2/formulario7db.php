@@ -98,6 +98,7 @@
             $sql = "INSERT INTO formulario (usuario, email, contrasena)
             VALUES ('$nombre', '$email', '$contra')";
 
+
             if ($conn->query($sql) === TRUE) {
                 echo "<br>Insertado correctamente.";
             } else {

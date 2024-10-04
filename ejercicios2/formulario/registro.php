@@ -19,14 +19,22 @@
 
     $sql = "INSERT INTO formulario (usuario, email, contrasena)
     VALUES ('$nombre', '$email', '$contra')";
-
-    if ($conn->query($sql) === TRUE) {
+    $sql2 = "SELECT email from formulario where email = '$email'";
+    $result = $conn->query($sql2);
+    if ($result->num_rows > 0) {
         header( "refresh:5;formularios.html" );
-        echo "Insertado correctamente.";
+        echo "El email ya existe.";
     } else {
-        header( "refresh:5;formularios.html" );
-        echo "<br>Error: " . $sql . "<br>" . $conn->error;
+        if ($conn->query($sql) === TRUE) {
+            header( "refresh:5;formularios.html" );
+            echo "Insertado correctamente.";
+        } else {
+            header( "refresh:5;formularios.html" );
+            echo "<br>Error: " . $sql . "<br>" . $conn->error;
+        }
     }
+
+    
 
     $conn->close();
 
