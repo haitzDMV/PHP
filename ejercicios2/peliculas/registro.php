@@ -18,7 +18,7 @@
 
     $sql = "INSERT INTO usuarios (usuario, contrasena)
     VALUES ('$nombre', '$contra')";
-    $sql2 = "SELECT nombre from usuarios where nombre = '$nombre'";
+    $sql2 = "SELECT usuario from usuarios where usuario = '$nombre'";
     $result = $conn->query($sql2);
     if ($result->num_rows > 0) {
         header( "refresh:5;formularios.html" );
