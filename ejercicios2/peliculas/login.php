@@ -18,10 +18,10 @@ if ($result->num_rows > 0) {
     session_start();
     $row = $result->fetch_assoc(); 
     $_SESSION['usuario'] = $row['usuario']; 
-    header( "refresh:5;index.php" );
+    header( "refresh:3;index.php" );
     echo "Sesión iniciada.";
 } else {
-    header( "refresh:5;index.php" );
+    header( "refresh:3;formularios.html" );
     echo "Nombre de usuario o contraseña incorrectos.";
 }
 
