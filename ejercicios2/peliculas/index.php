@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+include "gestion.php";
+
 $advertencia = "";
 
 $servidor = "db";
@@ -12,8 +14,8 @@ $conn = new mysqli($servidor, $usuario, $contrasena, $db);
 
 $usu = $_SESSION['usuario'];
 
-$sql1 = "SELECT * from peliculasUsuario where usuario = '$usu'";
-$result1 = $conn->query($sql1);
+
+mostrarPeliculas($usu);
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
@@ -21,16 +23,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     if (isset($_POST['isan'])) {
 
         $isan = $_POST['isan'];
-        $sql2 = "SELECT isan from peliculasUsuario where isan = '$isan'";
-        $result2 = $conn->query($sql2);
-        $res2 = $result2->fetch_assoc();
+        $result2 = devuelveISAN($isan);
 
-        if (isset($_POST['isan']) && empty($_POST['nombre'])) {
-            $sql3 = "DELETE FROM peliculasUsuario where isan='$isan'";
-            $conn->query($sql3);
-            $advertencia = "Pelicula borrada.";
+        if (isset($_POST['isan']) && empty($_POST['nombre'])) {            
+            if (deletePelicula($isan)) {
+                $advertencia = "Pelicula borrada.";
+            } else {
+                $advertencia = "Error, no se ha podido borrar.";
+            }
         }
-
 
         if (!empty($_POST['nombre']) && !empty($_POST['ano']) && !empty($_POST['puntuacion'])) {
 
@@ -39,25 +40,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
             $nombre = $_POST['nombre'];
 
             if ($result2->num_rows > 0 && isset($_POST['nombre']) && isset($_POST['ano']) && isset($_POST['puntuacion'])) {
-
-                $sql4 = "UPDATE peliculasUsuario set ano = '$ano', puntuacion = '$puntuacion', nombre_pelicula = '$nombre' where isan = '$isan'";
-                $conn->query($sql4);
-                $advertencia = "Pelicula actualizada.";
+                if (updatePelicula($isan,$ano,$puntuacion,$nombre)) {
+                    $advertencia = "Pelicula actualizada.";
+                } else {
+                    $advertencia = "Error, no se ha podido actualizar.";
+                }
             }
 
             if (!empty($_POST['ano']) && !empty($_POST['puntuacion'])) {
-                $sql5 = "INSERT INTO peliculasUsuario VALUES ('$usu','$isan','$nombre','$puntuacion','$ano')";
-                $conn->query($sql5);
-                $advertencia = "Pelicula añadida.";
+                if (updatePelicula($isan,$ano,$puntuacion,$nombre)) {
+                    $advertencia = "Pelicula insertada.";
+                } else {
+                    $advertencia = "Error, no se ha podido insertar.";
+                }
             }
         }
     }
 }
 
-while ($row = $result1->fetch_assoc()) {
-
-    echo "Nombre: " . $row['nombre_pelicula'] . " / ISAN: " . $row['ISAN'] . " / Puntuacion: " . $row['puntuacion'] . " / Año: " . $row['ano'] . "<br>";
-}
 
 ?>
 
