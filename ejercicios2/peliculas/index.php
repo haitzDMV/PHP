@@ -3,6 +3,8 @@ session_start();
 
 include "gestion.php";
 
+$conn = conn();
+
 $advertencia = "";
 
 $servidor = "db";
@@ -48,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
             }
 
             if (!empty($_POST['ano']) && !empty($_POST['puntuacion'])) {
-                if (updatePelicula($isan,$ano,$puntuacion,$nombre)) {
+                if (insertarPelicula($isan,$ano,$puntuacion,$nombre,$_SESSION['usuario'])) {
                     $advertencia = "Pelicula insertada.";
                 } else {
                     $advertencia = "Error, no se ha podido insertar.";
@@ -57,6 +59,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
         }
     }
 }
+
+
+
+
 
 
 ?>

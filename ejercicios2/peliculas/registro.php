@@ -1,4 +1,13 @@
 <?php 
+
+    $servidor = "db";
+    $usuario = "root";
+    $contrasena = "root";
+    $conn = new mysqli($servidor, $usuario, $contrasena);
+
+    $sql = "CREATE DATABASE IF NOT EXISTS mydatabase";
+    $conn->query($sql);
+
     $servidor = "db";
     $usuario = "root";
     $contrasena = "root";
@@ -10,6 +19,12 @@
     // Create connection
     $conn = new mysqli($servidor, $usuario, $contrasena,$db);
 
+    $query = 'CREATE TABLE IF NOT EXISTS usuarios (
+        usuario varchar(20),
+        contrasena varchar(30),
+        PRIMARY KEY(usuario)
+    )';
+    $conn->query($query);
 
     // Check connection
     if ($conn->connect_error) {
